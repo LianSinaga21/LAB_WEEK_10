@@ -6,8 +6,10 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
+    android:padding="16dp"
     tools:context=".MainActivity">
 
+    <!-- TOTAL dari Activity -->
     <TextView
         android:id="@+id/text_total"
         android:layout_width="wrap_content"
@@ -17,17 +19,29 @@
         android:textStyle="bold"
         android:textSize="32sp"/>
 
+    <!-- BTN -->
     <Button
         android:id="@+id/button_increment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_increment" />
 
-    <!-- Tambahan baru supaya Fragment muncul -->
+    <!-- LAST UPDATED DATE -->
+    <TextView
+        android:id="@+id/text_last_updated"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Last updated: -"
+        android:layout_marginTop="16dp"
+        android:textSize="16sp"
+        android:textStyle="italic" />
+
+    <!-- FRAGMENT -->
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="30dp"
         android:name="com.example.lab_week_10.FirstFragment" />
 
 </LinearLayout>

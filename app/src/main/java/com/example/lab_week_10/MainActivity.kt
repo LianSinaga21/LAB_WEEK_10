@@ -4,31 +4,38 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
 import com.example.lab_week_10.database.Total
 import com.example.lab_week_10.database.TotalDatabase
+import com.example.lab_week_10.database.TotalObject
 import com.example.lab_week_10.viewmodels.TotalViewModel
 
 class MainActivity : AppCompatActivity() {
 
-    // Database instance
     private val db by lazy { prepareDatabase() }
 
-    // ViewModel instance
     private val viewModel by lazy {
         ViewModelProvider(this)[TotalViewModel::class.java]
     }
+
+    private var lastUpdatedDate: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Load previous value from DB
         initializeValueFromDatabase()
-
-        // Start observing ViewModel & set button
         prepareViewModel()
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        if (lastUpdatedDate.isNotEmpty()) {
+            Toast.makeText(this, "Last updated: $lastUpdatedDate", Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun updateText(total: Int) {
@@ -37,48 +44,61 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun prepareViewModel() {
-
-        // Observe LiveData
-        viewModel.total.observe(this) {
-            updateText(it)
+        viewModel.total.observe(this) { value ->
+            updateText(value)
         }
 
-        // Button click
         findViewById<Button>(R.id.button_increment).setOnClickListener {
             viewModel.incrementTotal()
         }
     }
 
-    // PREPARE DATABASE
     private fun prepareDatabase(): TotalDatabase {
         return Room.databaseBuilder(
             applicationContext,
             TotalDatabase::class.java,
             "total-database"
-        ).allowMainThreadQueries().build()
+        )
+            .fallbackToDestructiveMigration()
+            .allowMainThreadQueries()
+            .build()
     }
 
-    // INITIALIZE VALUE FROM DB
     private fun initializeValueFromDatabase() {
-        val total = db.totalDao().getTotal(ID)
+        val totalData = db.totalDao().getTotal(ID)
 
-        if (total.isEmpty()) {
-            // If DB empty, insert starting value = 0
-            db.totalDao().insert(Total(id = ID, total = 0))
+        if (totalData.isEmpty()) {
+
+            val first = Total(
+                id = ID,
+                total = TotalObject(
+                    value = 0,
+                    date = java.util.Date().toString()
+                )
+            )
+
+            db.totalDao().insert(first)
+            viewModel.setTotal(0)
+
         } else {
-            // If DB has previous value → load it into ViewModel
-            viewModel.setTotal(total.first().total)
+            val saved = totalData.first()
+            viewModel.setTotal(saved.total.value)
+            lastUpdatedDate = saved.total.date
         }
     }
 
-    // SAVE NEW VALUE WHEN APP IS PAUSED
     override fun onPause() {
         super.onPause()
 
-        // Update DB with latest total
-        db.totalDao().update(
-            Total(ID, viewModel.total.value!!)
+        val updated = Total(
+            id = ID,
+            total = TotalObject(
+                value = viewModel.total.value ?: 0,
+                date = java.util.Date().toString()
+            )
         )
+
+        db.totalDao().update(updated)
     }
 
     companion object {
