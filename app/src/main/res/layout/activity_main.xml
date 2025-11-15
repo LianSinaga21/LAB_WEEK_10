@@ -6,15 +6,10 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-<<<<<<< HEAD
     android:padding="16dp"
     tools:context=".MainActivity">
 
     <!-- TOTAL dari Activity -->
-=======
-    tools:context=".MainActivity">
-
->>>>>>> 41f7753737e6f8608f3639b63890ad98ffe4445a
     <TextView
         android:id="@+id/text_total"
         android:layout_width="wrap_content"
@@ -24,35 +19,29 @@
         android:textStyle="bold"
         android:textSize="32sp"/>
 
-<<<<<<< HEAD
-    <!-- BTN -->
-=======
->>>>>>> 41f7753737e6f8608f3639b63890ad98ffe4445a
+    <!-- Button Increment -->
     <Button
         android:id="@+id/button_increment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_increment" />
 
-<<<<<<< HEAD
-    <!-- LAST UPDATED DATE -->
+    <!-- Last Updated -->
     <TextView
         android:id="@+id/text_last_updated"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Last updated: -"
         android:layout_marginTop="16dp"
-        android:textSize="16sp"
-        android:textStyle="italic" />
+        android:textStyle="italic"
+        android:textSize="16sp"/>
 
-    <!-- FRAGMENT -->
+    <!-- Fragment Container -->
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_container"
+        android:name="com.example.lab_week_10.FirstFragment"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_marginTop="30dp"
-        android:name="com.example.lab_week_10.FirstFragment" />
+        android:layout_marginTop="30dp" />
 
-=======
->>>>>>> 41f7753737e6f8608f3639b63890ad98ffe4445a
 </LinearLayout>

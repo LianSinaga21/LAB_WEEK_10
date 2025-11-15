@@ -1,12 +1,7 @@
 plugins {
-<<<<<<< HEAD
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("org.jetbrains.kotlin.kapt")     // ✔ sudah sesuai modul step 2
-=======
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
->>>>>>> 41f7753737e6f8608f3639b63890ad98ffe4445a
+    id("org.jetbrains.kotlin.kapt")
 }
 
 android {
@@ -32,6 +27,7 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -48,22 +44,19 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+
+    // ViewModel + LiveData
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
-<<<<<<< HEAD
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
 
+    // Room
     val roomVersion = "2.6.0"
     implementation("androidx.room:room-runtime:$roomVersion")
     annotationProcessor("androidx.room:room-compiler:$roomVersion")
     kapt("androidx.room:room-compiler:$roomVersion")
 
+    // Test
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }
-=======
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-}
->>>>>>> 41f7753737e6f8608f3639b63890ad98ffe4445a
