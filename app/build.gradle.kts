@@ -1,7 +1,12 @@
 plugins {
+<<<<<<< HEAD
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.kapt")     // ✔ sudah sesuai modul step 2
+=======
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+>>>>>>> 41f7753737e6f8608f3639b63890ad98ffe4445a
 }
 
 android {
@@ -44,6 +49,7 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
+<<<<<<< HEAD
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
 
     val roomVersion = "2.6.0"
@@ -55,3 +61,9 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }
+=======
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+}
+>>>>>>> 41f7753737e6f8608f3639b63890ad98ffe4445a

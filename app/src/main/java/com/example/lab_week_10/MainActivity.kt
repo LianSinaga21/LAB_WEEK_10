@@ -14,12 +14,15 @@ import com.example.lab_week_10.viewmodels.TotalViewModel
 
 class MainActivity : AppCompatActivity() {
 
+    // Database
     private val db by lazy { prepareDatabase() }
 
+    // ViewModel
     private val viewModel by lazy {
         ViewModelProvider(this)[TotalViewModel::class.java]
     }
 
+    // Last updated date
     private var lastUpdatedDate: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +35,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-
         if (lastUpdatedDate.isNotEmpty()) {
             Toast.makeText(this, "Last updated: $lastUpdatedDate", Toast.LENGTH_LONG).show()
         }
@@ -68,7 +70,6 @@ class MainActivity : AppCompatActivity() {
         val totalData = db.totalDao().getTotal(ID)
 
         if (totalData.isEmpty()) {
-
             val first = Total(
                 id = ID,
                 total = TotalObject(
@@ -76,10 +77,8 @@ class MainActivity : AppCompatActivity() {
                     date = java.util.Date().toString()
                 )
             )
-
             db.totalDao().insert(first)
             viewModel.setTotal(0)
-
         } else {
             val saved = totalData.first()
             viewModel.setTotal(saved.total.value)

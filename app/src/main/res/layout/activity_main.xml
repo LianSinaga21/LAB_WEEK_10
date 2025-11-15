@@ -6,10 +6,15 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
+<<<<<<< HEAD
     android:padding="16dp"
     tools:context=".MainActivity">
 
     <!-- TOTAL dari Activity -->
+=======
+    tools:context=".MainActivity">
+
+>>>>>>> 41f7753737e6f8608f3639b63890ad98ffe4445a
     <TextView
         android:id="@+id/text_total"
         android:layout_width="wrap_content"
@@ -19,13 +24,17 @@
         android:textStyle="bold"
         android:textSize="32sp"/>
 
+<<<<<<< HEAD
     <!-- BTN -->
+=======
+>>>>>>> 41f7753737e6f8608f3639b63890ad98ffe4445a
     <Button
         android:id="@+id/button_increment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_increment" />
 
+<<<<<<< HEAD
     <!-- LAST UPDATED DATE -->
     <TextView
         android:id="@+id/text_last_updated"
@@ -44,4 +53,6 @@
         android:layout_marginTop="30dp"
         android:name="com.example.lab_week_10.FirstFragment" />
 
+=======
+>>>>>>> 41f7753737e6f8608f3639b63890ad98ffe4445a
 </LinearLayout>
